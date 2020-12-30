@@ -1,5 +1,6 @@
 package com.wang.boot;
 
+import ch.qos.logback.core.db.DBHelper;
 import com.wang.boot.bean.Pet;
 import com.wang.boot.bean.User;
 import com.wang.boot.config.MyConfig;
@@ -51,5 +52,21 @@ public class MainApplication {
         System.out.println(user);
         //如果@Configuration(proxyBeanMethods = true),则user01这个组件,依赖了pet02组件:user01内的Pet和pet02是同一个实例
         System.out.println("Pet:" + (user.getPet() == pet));
+
+        //5 获取组件 getBeanNamesForType(User.class):根据类名获取容器内的全部实例
+        String[] beanNamesForType = run.getBeanNamesForType(User.class);
+        System.out.println("============================================");
+        for (String s : beanNamesForType) {
+            System.out.println(s);
+        }
+
+        DBHelper dbHelper = run.getBean(DBHelper.class);
+        System.out.println(dbHelper);
+        System.out.println("============================================");
+
+        boolean pet1 = run.containsBean("pet");
+        System.out.println("容器中包含pet组件:" + pet1);
+        boolean user1 = run.containsBean("user01");
+        System.out.println("容器中包含user01组件:" + user1);
     }
 }
