@@ -5,8 +5,10 @@ import com.wang.boot.bean.Pet;
 import com.wang.boot.bean.User;
 import com.wang.boot.config.MyConfig;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author Qing
@@ -17,8 +19,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 /**
  * 主程序类
  * 使用@SpringBootApplication 表明这是一个SpringBoot应用
+ *
+ * @SpringBootApplication 等同于
+ *      @SpringBootConfiguration
+ *      @EnableAutoConfiguration
+ *      @ComponentScan("com.wang.boot") 这三个配置
  */
-@SpringBootApplication
+//@SpringBootApplication
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan("com.wang.boot")
 public class MainApplication {
 
     public static void main(String[] args) {
@@ -64,9 +74,19 @@ public class MainApplication {
         System.out.println(dbHelper);
         System.out.println("============================================");
 
-        boolean pet1 = run.containsBean("pet");
-        System.out.println("容器中包含pet组件:" + pet1);
+        //containsBean("xxx")   判断容器中是否包含组件 xxx
+        boolean pet1 = run.containsBean("pet01");
+        System.out.println("容器中包含pet01组件:" + pet1);
+        boolean pet2 = run.containsBean("pet02");
+        System.out.println("容器中包含pet02组件:" + pet2);
         boolean user1 = run.containsBean("user01");
         System.out.println("容器中包含user01组件:" + user1);
+        boolean user2 = run.containsBean("user02");
+        System.out.println("容器中包含user02组件:" + user2);
+
+        boolean user11 = run.containsBean("user11");
+        System.out.println("容器中包含beans.xml内的user11组件:" + user11);
+        boolean pet11 = run.containsBean("pet11");
+        System.out.println("容器中包含beans.xml内的pet11组件:" + pet11);
     }
 }
