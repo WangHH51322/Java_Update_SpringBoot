@@ -35,11 +35,14 @@ public class MainApplication {
         //1.返回IOC容器
         ConfigurableApplicationContext run = SpringApplication.run(MainApplication.class, args);
 
-        //2.查看容器里面的组件
+        //2.查看容器里面的组件名称
         String[] names = run.getBeanDefinitionNames();
         for (String name : names) {
 //            System.out.println(name);
         }
+        //查看容器里面的组件数量
+        int beanDefinitionCount = run.getBeanDefinitionCount();
+        System.out.println(beanDefinitionCount);
 
         //3从容器中获取组件
         Pet pet01 = run.getBean("pet02", Pet.class);

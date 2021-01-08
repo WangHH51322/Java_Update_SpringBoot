@@ -1,5 +1,9 @@
 package com.wang.boot.bean;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -17,41 +21,14 @@ import org.springframework.stereotype.Component;
  * 因为Car这个实体类可能来自第三方包,所以没有@Component注解,此时就需要在本地的配置文件 MyConfig中使用@EnableConfigurationProperties注解
  */
 //@Component
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @ConfigurationProperties(prefix = "mycar")
 public class Car {
 
     private String Band;
     private double price;
 
-    public Car() {
-    }
-
-    public Car(String band, double price) {
-        Band = band;
-        this.price = price;
-    }
-
-    public String getBand() {
-        return Band;
-    }
-
-    public void setBand(String band) {
-        Band = band;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "Band='" + Band + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }
